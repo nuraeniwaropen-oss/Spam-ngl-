@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Lumina - NGL Spammer Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e8e8ec 0%, #d0d0d8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            max-width: 480px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
+        .header h1 i {
+            color: #ff6600;
+            margin-right: 8px;
+        }
+
+        .header p {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .label i {
+            color: #ff6600;
+        }
+
+        .input-glass {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            color: #1a1a1a;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .input-glass:focus {
+            outline: none;
+            border-color: #ff6600;
+            background: white;
+        }
+
+        textarea.input-glass {
+            resize: vertical;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* SELECT GLOWING */
+        .method-section {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            color: #ff6600;
+        }
+
+        .custom-select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .custom-select:focus {
+            outline: none;
+            border-color: #ff6600;
+            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+        }
+
+        .info-box {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #444;
+        }
+
+        .info-box span:first-child {
+            font-weight: 600;
+        }
+
+        .info-box i {
+            color: #ff6600;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-send {
+            flex: 3;
+            padding: 14px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border: none;
+            border-radius: 40px;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-send:hover {
+            background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+            transform: scale(0.98);
+        }
+
+        .btn-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            padding: 14px;
+            background: rgba(180, 60, 60, 0.15);
+            border: 1px solid rgba(180, 60, 60, 0.4);
+            border-radius: 40px;
+            color: #a33;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(180, 60, 60, 0.25);
+        }
+
+        .progress-area {
+            margin-top: 16px;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar-bg {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            height: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #ff6600, #ffaa44);
+            width: 0%;
+            height: 4px;
+            border-radius: 20px;
+            transition: width 0.2s ease;
+            box-shadow: 0 0 6px rgba(255, 102, 0, 0.6);
+        }
+
+        .status-box {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 12px;
+            margin-top: 16px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        .status-box i {
+            color: #ff6600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes slowPulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.01); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+
+        .pulse-animation {
+            animation: slowPulse 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <div class="header">
+            <h1><i class="fas fa-bolt"></i> LUMINA</h1>
+            <p>NGL Anonymous Spammer Pro</p>
+        </div>
+
+        <div class="content">
+            <!-- NAMA NGL TARGET -->
+            <div class="label">
+                <i class="fas fa-user"></i>
+                <span>NAMA NGL TARGET</span>
+            </div>
+            <input type="text" id="targetName" class="input-glass" placeholder="contoh: johndoe">
+
+            <!-- INPUT PESAN -->
+            <div class="label">
+                <i class="fas fa-comment"></i>
+                <span>INPUT PESAN</span>
+            </div>
+            <textarea id="messageInput" rows="3" class="input-glass" placeholder="Tulis pesan yang mau dikirim..."></textarea>
+
+            <!-- METODE SPAM (SELECT) -->
+            <div class="method-section">
+                <div class="section-title">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>METODE SPAM</span>
+                </div>
+                <select id="methodSelect" class="custom-select">
+                    <option value="0">⚡ 10 pesan - Jeda 3 detik</option>
+                    <option value="1">⚡ 30 pesan - Jeda 2 detik</option>
+                    <option value="2">⚡ 50 pesan - Jeda 1 detik</option>
+                </select>
+            </div>
+
+            <!-- Info Status -->
+            <div class="info-box">
+                <span><i class="fas fa-chart-line"></i> STATUS SPAM</span>
+                <span id="methodInfo">Mode: 10 pesan | Jeda 3 detik</span>
+            </div>
+
+            <!-- Progress Area -->
+            <div id="progressArea" class="progress-area hidden">
+                <div class="progress-text">
+                    <span><i class="fas fa-spinner fa-pulse"></i> Mengirim pesan...</span>
+                    <span id="percentText">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Tombol -->
+            <div class="button-group">
+                <button id="sendBtn" class="btn-send"><i class="fas fa-paper-plane"></i> KIRIM SEKARANG</button>
+                <button id="cancelBtn" class="btn-cancel"><i class="fas fa-ban"></i> BATAL</button>
+            </div>
+
+            <!-- Status Box -->
+            <div id="statusBox" class="status-box">
+                <i class="fas fa-info-circle"></i> Siap mengirim spam ke NGL
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data metode
+        const methods = [
+            { count: 10, delay: 3000, name: '10 pesan | Jeda 3 detik' },
+            { count: 30, delay: 2000, name: '30 pesan | Jeda 2 detik' },
+            { count: 50, delay: 1000, name: '50 pesan | Jeda 1 detik' }
+        ];
+        
+        let selectedIndex = 0;
+        let cancelSpam = false;
+        let isSending = false;
+        
+        // DOM Elements
+        const targetInput = document.getElementById('targetName');
+        const messageInput = document.getElementById('messageInput');
+        const methodSelect = document.getElementById('methodSelect');
+        const sendBtn = document.getElementById('sendBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const progressArea = document.getElementById('progressArea');
+        const progressFill = document.getElementById('progressFill');
+        const percentText = document.getElementById('percentText');
+        const statusBox = document.getElementById('statusBox');
+        const methodInfo = document.getElementById('methodInfo');
+        
+        // ==================== EVENT SELECT ====================
+        methodSelect.addEventListener('change', function() {
+            selectedIndex = parseInt(this.value);
+            methodInfo.innerText = `Mode: ${methods[selectedIndex].name}`;
+            
+            // Efek slowmo saat ganti metode
+            statusBox.classList.add('pulse-animation');
+            setTimeout(() => {
+                statusBox.classList.remove('pulse-animation');
+            }, 500);
+        });
+        
+        // ==================== TOAST ====================
+        function showToast(msg, isError) {
+            let t = document.createElement('div');
+            t.style.position = 'fixed';
+            t.style.bottom = '20px';
+            t.style.left = '20px';
+            t.style.right = '20px';
+            t.style.maxWidth = '400px';
+            t.style.margin = 'auto';
+            t.style.background = isError ? 'rgba(180, 60, 60, 0.95)' : 'rgba(40, 40, 50, 0.95)';
+            t.style.backdropFilter = 'blur(12px)';
+            t.style.color = 'white';
+            t.style.padding = '12px 18px';
+            t.style.borderRadius = '24px';
+            t.style.fontSize = '14px';
+            t.style.fontWeight = '500';
+            t.style.textAlign = 'center';
+            t.style.zIndex = '9999';
+            t.style.border = isError ? '1px solid #ff5a5a' : '1px solid #ffaa44';
+            t.innerHTML = (isError ? '<i class="fas fa-exclamation-triangle"></i> ' : '<i class="fas fa-check-circle"></i> ') + msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 2500);
+        }
+        
+        // ==================== SPAM NGL ====================
+        async function sendSpamNGL(username, message, total, delayMs, onProgress) {
+            let success = 0;
+            for (let i = 1; i <= total; i++) {
+                if (cancelSpam) break;
+                
+                try {
+                    const formBody = new URLSearchParams();
+                    formBody.append('username', username);
+                    formBody.append('question', message);
+                    formBody.append('deviceId', 'web_' + Date.now() + '_' + i + '_' + Math.random());
+                    
+                    const response = await fetch('https://ngl.link/api/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                        },
+                        body: formBody
+                    });
+                    
+                    if (response.ok) {
+                        success++;
+                        onProgress(i, total, true);
+                    } else {
+                        onProgress(i, total, false);
+                    }
+                } catch (err) {
+                    onProgress(i, total, false);
+                }
+                
+                if (i < total && !cancelSpam) {
+                    await new Promise(r => setTimeout(r, delayMs));
+                }
+            }
+            return success;
+        }
+        
+        // ==================== KIRIM ====================
+        sendBtn.onclick = async function() {
+            if (isSending) {
+                showToast('Sedang mengirim, tunggu selesai!', true);
+                return;
+            }
+            
+            const target = targetInput.value.trim();
+            const message = messageInput.value.trim();
+            
+            if (!target) {
+                showToast('Isi nama NGL target!', true);
+                return;
+            }
+            if (!message) {
+                showToast('Isi pesan yang mau dikirim!', true);
+                return;
+            }
+            
+            const method = methods[selectedIndex];
+            const total = method.count;
+            const delay = method.delay;
+            
+            isSending = true;
+            cancelSpam = false;
+            
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> MENGIRIM...';
+            progressArea.classList.remove('hidden');
+            progressFill.style.width = '0%';
+            percentText.innerText = '0%';
+            statusBox.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Sedang mengirim spam ke @' + target + '...';
+            
+            let successCount = 0;
+            
+            const onProgress = (current, totalMsg, isSuccess) => {
+                const percent = (current / totalMsg) * 100;
+                progressFill.style.width = percent + '%';
+                percentText.innerText = Math.floor(percent) + '%';
+                if (isSuccess) successCount++;
+                statusBox.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Mengirim ${current}/${totalMsg} | Berhasil: ${successCount}`;
+            };
+            
+            try {
+                const result = await sendSpamNGL(target, message, total, delay, onProgress);
+                successCount = result;
+                
+                if (successCount > 0) {
+                    statusBox.innerHTML = `<i class="fas fa-check-circle"></i> Selesai! ${successCount}/${total} pesan terkirim ke @${target}`;
+                    showToast(`${successCount}/${total} pesan berhasil dikirim`, false);
+                } else {
+                    statusBox.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Gagal! Tidak ada pesan terkirim.`;
+                    showToast('Gagal mengirim pesan', true);
+                }
+            } catch (err) {
+                statusBox.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Error: ${err.message}`;
+                showToast('Terjadi kesalahan', true);
+            } finally {
+                isSending = false;
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> KIRIM SEKARANG';
+                progressArea.classList.add('hidden');
+                
+                setTimeout(() => {
+                    if (statusBox.innerHTML.includes('Selesai') || statusBox.innerHTML.includes('Gagal')) {
+                        statusBox.innerHTML = '<i class="fas fa-info-circle"></i> Siap mengirim spam ke NGL';
+                    }
+                }, 3000);
+            }
+        };
+        
+        // ==================== BATAL ====================
+        cancelBtn.onclick = function() {
+            if (isSending) {
+                cancelSpam = true;
+                statusBox.innerHTML = '<i class="fas fa-ban"></i> Membatalkan pengiriman...';
+                showToast('Membatalkan spam...', true);
+            } else {
+                showToast('Tidak ada pengiriman yang aktif', true);
+            }
+        };
+    </script>
+</body>
+</html>
